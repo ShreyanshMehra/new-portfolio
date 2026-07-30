@@ -149,12 +149,6 @@ const MobileMenu = ({ open, onClose }) => (
 );
 
 /* ---------------- Hero section ---------------- */
-const achievementChips = [
-  { title: 'JEE ADV', sub: 'Qualified' },
-  { title: 'AS GRADE', sub: 'Top 2-3%' },
-  { title: 'NTSE', sub: 'Stage 1' },
-];
-
 const focusAreas = [
   'Agentic Systems',
   'Backend & Infra',
@@ -186,24 +180,23 @@ const HeroSection = ({ onMenuOpen }) => (
       {/* Meta grid */}
       <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
         <div>
-          <h2 className="text-lg md:text-xl tracking-wide leading-tight">
-            <span className="font-normal block">SHREYANSH</span>
-            <span className="font-pixel text-2xl md:text-3xl block">MEHRA</span>
-          </h2>
-          <p className="text-[10px] text-white/50 mt-3">*</p>
-          <p className="font-pixel mt-1 text-xs text-white/60 leading-relaxed">
-            IIT Guwahati '27 —<br />
-            Software Engineer Intern<br />
-            at Microsoft, building<br />
-            agentic developer tools
-          </p>
+          <div className="w-24 h-24 md:w-28 md:h-28 rounded-lg overflow-hidden border border-white/20">
+            <img src={prf} alt="Shreyansh Dutt Mehra" className="w-full h-full object-cover" />
+          </div>
         </div>
 
         <div className="text-right lg:text-left">
           <h2 className="text-lg md:text-xl tracking-wide leading-tight">
-            <span className="font-normal block">SOFTWARE &</span>
-            <span className="font-pixel text-2xl md:text-3xl block">SYSTEMS</span>
+            <span className="font-normal block">SHREYANSH DUTT</span>
+            <span className="font-pixel text-2xl md:text-3xl block">MEHRA</span>
           </h2>
+          <p className="text-[10px] text-white/50 mt-3">*</p>
+          <p className="font-pixel mt-1 text-xs text-white/60 leading-relaxed">
+            IIT Guwahati — B.Tech<br />
+            Software Engineer Intern<br />
+            @ Microsoft &middot; Prior: IDEAS-TIH<br />
+            (ISI Kolkata), NoQS Digital
+          </p>
         </div>
 
         <div>
@@ -241,20 +234,11 @@ const HeroSection = ({ onMenuOpen }) => (
           <div className="flex flex-col gap-4 sm:gap-6 justify-end">
             <a
               href={RESUME_URL}
-              className="self-start flex items-center gap-3 border border-white/30 px-6 py-3 backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-colors"
+              className="self-start lg:self-end flex items-center gap-3 border border-white/30 px-6 py-3 backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-colors"
             >
               <Download size={14} />
               <span className="text-sm tracking-wider">VIEW RESUME</span>
             </a>
-
-            <div className="self-start lg:self-end flex flex-wrap items-stretch gap-2 sm:gap-3 text-sm text-white/80">
-              {achievementChips.map((chip) => (
-                <div key={chip.title} className="bg-[#0B0B0B] px-3 sm:px-4 py-2 flex flex-col justify-center">
-                  <span className="font-bold text-sm sm:text-base tracking-tight">{chip.title}</span>
-                  <span className="text-white/50 text-[10px] sm:text-xs">{chip.sub}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
