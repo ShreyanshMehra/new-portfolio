@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Download, Menu, X } from 'lucide-react';
 import './index.css';
 import docaiIMG from './assets/docai.png';
 import hpIMG from './assets/HP.png';
@@ -6,6 +7,8 @@ import sbiIMG from './assets/sbi.png';
 import sqlIMG from './assets/sq;.png';
 import churnIMG from './assets/churn.png';
 import prf from './assets/prf.jpg';
+
+const RESUME_URL = 'https://drive.google.com/uc?export=download&id=1VWau6jbTt_ORxOK5zW2f8nqhShGJp3eh';
 
 /* ---------------- Reveal-on-scroll wrapper ---------------- */
 const Reveal = ({ children, delay = 0, className = '' }) => {
@@ -41,55 +44,7 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
   );
 };
 
-/* ---------------- Animated background ---------------- */
-const AnimatedBackground = () => (
-  <div className="fixed inset-0 -z-10 overflow-hidden bg-gray-950">
-    <div className="absolute top-[-10%] left-[-10%] w-[28rem] h-[28rem] bg-blue-600/20 rounded-full blur-3xl animate-blob" />
-    <div className="absolute top-[20%] right-[-10%] w-[24rem] h-[24rem] bg-purple-600/20 rounded-full blur-3xl animate-blob [animation-delay:2s]" />
-    <div className="absolute bottom-[-10%] left-[20%] w-[26rem] h-[26rem] bg-cyan-500/10 rounded-full blur-3xl animate-blob [animation-delay:4s]" />
-    <div
-      className="absolute inset-0 opacity-[0.03]"
-      style={{
-        backgroundImage:
-          'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
-        backgroundSize: '48px 48px',
-      }}
-    />
-  </div>
-);
-
 /* ---------------- Icons ---------------- */
-const HomeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-  </svg>
-);
-const BriefcaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-    <line x1="8" y1="21" x2="16" y2="21"></line>
-    <line x1="12" y1="17" x2="12" y2="21"></line>
-  </svg>
-);
-const ProjectIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-    <line x1="3" y1="9" x2="21" y2="9"></line>
-    <line x1="9" y1="21" x2="9" y2="9"></line>
-  </svg>
-);
-const TrophyIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-    <path d="M20 9h1.5a2.5 2.5 0 0 0 0-5H20"></path>
-    <path d="M4 22h16"></path>
-    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-    <path d="M18 2v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V2"></path>
-    <path d="M12 2v3"></path>
-  </svg>
-);
 const ExternalLinkIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -119,219 +74,317 @@ const socialLinks = [
   { name: 'LeetCode', href: 'https://leetcode.com/u/shreyanshduttmehra/', icon: <LeetcodeIcon /> },
 ];
 
-/* ---------------- App ---------------- */
-const App = () => {
-  const [activeTab, setActiveTab] = useState('Home');
-  const tabs = ['Home', 'Experience', 'Projects', 'Certification'];
+const NAV_LINKS = [
+  { label: 'ABOUT', href: '#about' },
+  { label: 'EXPERIENCE', href: '#experience' },
+  { label: 'PROJECTS', href: '#projects' },
+  { label: 'ACHIEVEMENTS', href: '#achievements' },
+  { label: 'CONTACT', href: '#contact' },
+];
 
-  return (
-    <div className="text-white min-h-screen font-sans selection:bg-blue-500/40">
-      <AnimatedBackground />
+/* ---------------- Logo: a blocky pixel "S" monogram ---------------- */
+const PIXEL_S_CELLS = [
+  [0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
+  [1, 0],
+  [2, 0], [2, 1], [2, 2], [2, 3], [2, 4],
+  [3, 4],
+  [4, 0], [4, 1], [4, 2], [4, 3], [4, 4],
+];
 
-      {/* Navigation Bar */}
-      <header className="sticky top-0 z-20 backdrop-blur-md bg-gray-950/70 border-b border-white/10">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent">
-            Shreyansh Dutt Mehra
+const Logo = ({ size = 28 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 100 100" fill="none" aria-label="Shreyansh Mehra logo">
+    {PIXEL_S_CELLS.map(([row, col]) => (
+      <rect key={`${row}-${col}`} x={col * 20} y={row * 20} width="18" height="18" fill="white" />
+    ))}
+  </svg>
+);
+
+/* ---------------- Hero animated background (no video asset; generated instead) ---------------- */
+const HeroBackground = () => (
+  <div className="absolute inset-0 h-full w-full overflow-hidden bg-black">
+    <div className="absolute top-[-15%] left-[-10%] w-[36rem] h-[36rem] bg-white/[0.06] rounded-full blur-3xl animate-blob" />
+    <div className="absolute bottom-[-20%] right-[-10%] w-[32rem] h-[32rem] bg-white/[0.05] rounded-full blur-3xl animate-blob [animation-delay:3s]" />
+    <div className="absolute top-[30%] right-[15%] w-[20rem] h-[20rem] bg-white/[0.04] rounded-full blur-3xl animate-blob [animation-delay:6s]" />
+    <div
+      className="absolute inset-0 opacity-[0.04]"
+      style={{
+        backgroundImage:
+          'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
+        backgroundSize: '56px 56px',
+      }}
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
+  </div>
+);
+
+/* ---------------- Mobile fullscreen menu ---------------- */
+const MobileMenu = ({ open, onClose }) => (
+  <div
+    className={`fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+    }`}
+  >
+    <div className="flex items-center justify-between px-6 py-6">
+      <Logo />
+      <button onClick={onClose} aria-label="Close menu" className="p-2 hover:opacity-70 transition-opacity">
+        <X size={24} />
+      </button>
+    </div>
+    <nav className="flex flex-col items-center justify-center flex-1 gap-8">
+      {NAV_LINKS.map((link, i) => (
+        <a
+          key={link.label}
+          href={link.href}
+          onClick={onClose}
+          style={{ transitionDelay: open ? `${100 + i * 60}ms` : '0ms' }}
+          className={`text-2xl tracking-widest transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:opacity-70 ${
+            open ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+);
+
+/* ---------------- Hero section ---------------- */
+const achievementChips = [
+  { title: 'JEE ADV', sub: 'Qualified' },
+  { title: 'AS GRADE', sub: 'Top 2-3%' },
+  { title: 'NTSE', sub: 'Stage 1' },
+];
+
+const focusAreas = [
+  'Agentic Systems',
+  'Backend & Infra',
+  'Developer Tooling',
+  'CRDTs & Distributed Systems',
+  'ML & Data Pipelines',
+  'Policy & Governance',
+];
+
+const HeroSection = ({ onMenuOpen }) => (
+  <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+    <HeroBackground />
+    <div className="relative z-10 flex h-full flex-col px-5 sm:px-6 md:px-10 lg:px-14">
+      {/* Navbar */}
+      <div className="flex items-center justify-between py-6">
+        <Logo />
+        <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
+          {NAV_LINKS.map((link) => (
+            <a key={link.label} href={link.href} className="hover:opacity-70 transition-opacity">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <button onClick={onMenuOpen} className="md:hidden p-2 hover:opacity-70 transition-opacity" aria-label="Open menu">
+          <Menu size={24} />
+        </button>
+      </div>
+
+      {/* Meta grid */}
+      <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+        <div>
+          <h2 className="text-lg md:text-xl tracking-wide leading-tight">
+            <span className="font-normal block">SHREYANSH</span>
+            <span className="font-pixel text-2xl md:text-3xl block">MEHRA</span>
+          </h2>
+          <p className="text-[10px] text-white/50 mt-3">*</p>
+          <p className="font-pixel mt-1 text-xs text-white/60 leading-relaxed">
+            IIT Guwahati '27 —<br />
+            Software Engineer Intern<br />
+            at Microsoft, building<br />
+            agentic developer tools
+          </p>
+        </div>
+
+        <div className="text-right lg:text-left">
+          <h2 className="text-lg md:text-xl tracking-wide leading-tight">
+            <span className="font-normal block">SOFTWARE &</span>
+            <span className="font-pixel text-2xl md:text-3xl block">SYSTEMS</span>
+          </h2>
+        </div>
+
+        <div>
+          <p className="text-base tracking-widest text-white/50 uppercase mb-3 font-pixel">What I Do</p>
+          <p className="text-sm text-white/90 leading-relaxed max-w-[220px]">
+            I build agentic pipelines, developer tooling, and backend systems that hold up under real constraints
+          </p>
+        </div>
+
+        <div className="text-right lg:text-left">
+          <p className="text-base tracking-widest text-white/50 uppercase mb-3 font-pixel">Focus Areas</p>
+          <ul className="text-sm text-white/90 leading-relaxed space-y-0.5">
+            {focusAreas.map((area) => (
+              <li key={area}>{area}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="flex-1" />
+
+      {/* Bottom block */}
+      <div className="pb-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-end">
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] tracking-wide uppercase font-normal"
+            style={{ lineHeight: 0.72 }}
+          >
+            I BUILD<br />
+            <span className="font-pixel font-normal text-[1.25em] inline-block leading-none align-baseline">RELIABLE</span> SYSTEMS FOR<br />
+            AGENTS & DEVELOPER<br />
+            <span className="font-pixel font-normal text-[1.25em] inline-block leading-none align-baseline">TOOLING</span>
           </h1>
-          <div className="flex items-center gap-6">
-            <nav className="hidden md:flex space-x-6">
-              {tabs.map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`relative font-medium text-sm py-1 transition-colors ${
-                    activeTab === tab ? 'text-blue-400' : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {tab}
-                  {activeTab === tab && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full" />
-                  )}
-                </button>
-              ))}
-            </nav>
-            <div className="hidden md:flex items-center gap-3">
-              {socialLinks.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.name}
-                  className="text-gray-400 hover:text-blue-400 hover:-translate-y-0.5 transition-all"
-                >
-                  {s.icon}
-                </a>
+
+          <div className="flex flex-col gap-4 sm:gap-6 justify-end">
+            <a
+              href={RESUME_URL}
+              className="self-start flex items-center gap-3 border border-white/30 px-6 py-3 backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-colors"
+            >
+              <Download size={14} />
+              <span className="text-sm tracking-wider">VIEW RESUME</span>
+            </a>
+
+            <div className="self-start lg:self-end flex flex-wrap items-stretch gap-2 sm:gap-3 text-sm text-white/80">
+              {achievementChips.map((chip) => (
+                <div key={chip.title} className="bg-[#0B0B0B] px-3 sm:px-4 py-2 flex flex-col justify-center">
+                  <span className="font-bold text-sm sm:text-base tracking-tight">{chip.title}</span>
+                  <span className="text-white/50 text-[10px] sm:text-xs">{chip.sub}</span>
+                </div>
               ))}
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-950/90 backdrop-blur-md border-t border-white/10 z-20">
-        <div className="flex justify-around py-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex flex-col items-center p-2 transition-colors ${activeTab === tab ? 'text-blue-400' : 'text-gray-400'}`}
-            >
-              {tab === 'Home' && <HomeIcon />}
-              {tab === 'Experience' && <BriefcaseIcon />}
-              {tab === 'Projects' && <ProjectIcon />}
-              {tab === 'Certification' && <TrophyIcon />}
-              <span className="text-xs mt-1">{tab}</span>
-            </button>
-          ))}
+        <div className="mt-4 sm:mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 pt-4 border-t border-white/10">
+          <p className="text-xs text-white/60">
+            Open to SWE internships &amp; full-time opportunities.{' '}
+            <a href="mailto:shreyanshduttmehra@gmail.com" className="text-red-500 hover:text-red-400 transition-colors">
+              Email me
+            </a>
+          </p>
+          <p className="text-xs text-white/60 sm:text-right">
+            4 featured projects &bull; Microsoft SWE Intern &bull; IIT Guwahati '27
+          </p>
         </div>
-      </nav>
-
-      {/* Content Sections */}
-      <main className="container mx-auto px-4 py-10 pb-24 md:pb-10">
-        {activeTab === 'Home' && <HomeSection />}
-        {activeTab === 'Experience' && <ExperienceSection />}
-        {activeTab === 'Projects' && <ProjectsSection />}
-        {activeTab === 'Certification' && <CertificationSection />}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-6 mt-4">
-        <div className="container mx-auto px-4 text-center text-gray-500 text-sm">
-          © {new Date().getFullYear()} Shreyansh Dutt Mehra · Built with React & TailwindCSS
-        </div>
-      </footer>
+      </div>
     </div>
-  );
-};
+  </section>
+);
 
-/* ---------------- Home ---------------- */
+/* ---------------- Sticky nav (appears once hero is scrolled past) ---------------- */
+const StickyNav = ({ visible, onMenuOpen }) => (
+  <header
+    className={`fixed top-0 left-0 right-0 z-30 backdrop-blur-md bg-black/80 border-b border-white/10 transition-transform duration-300 ${
+      visible ? 'translate-y-0' : '-translate-y-full'
+    }`}
+  >
+    <div className="px-5 sm:px-6 md:px-10 lg:px-14 py-4 flex items-center justify-between">
+      <Logo size={22} />
+      <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
+        {NAV_LINKS.map((link) => (
+          <a key={link.label} href={link.href} className="hover:opacity-70 transition-opacity">
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <button onClick={onMenuOpen} className="md:hidden p-2 hover:opacity-70 transition-opacity" aria-label="Open menu">
+        <Menu size={22} />
+      </button>
+    </div>
+  </header>
+);
+
+/* ---------------- About section ---------------- */
 const skillGroups = [
   { label: 'Languages', skills: ['Python', 'Go', 'C/C++', 'JavaScript', 'SQL'] },
   { label: 'Backend & Infra', skills: ['FastAPI', 'Docker', 'PostgreSQL', 'WebSockets', 'REST APIs', 'OPA/Rego', 'pytest', 'Git'] },
   { label: 'ML & Data', skills: ['PyTorch', 'Scikit-learn', 'XGBoost', 'Prophet', 'LangChain/LangGraph', 'ChromaDB', 'NumPy', 'Pandas'] },
 ];
 
-const HomeSection = () => (
-  <section className="max-w-4xl mx-auto">
-    <Reveal>
-      <div className="flex flex-col md:flex-row items-center gap-8">
-        <div className="relative w-40 h-40 md:w-52 md:h-52 shrink-0 animate-float">
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-blue-500 via-purple-500 to-cyan-400 blur opacity-60" />
-          <img src={prf} alt="Profile" className="relative w-full h-full object-cover rounded-full border-4 border-gray-950" />
-        </div>
-        <div className="text-center md:text-left">
-          <p className="text-blue-400 font-mono text-sm mb-2">Hi, my name is</p>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-3 tracking-tight">Shreyansh Dutt Mehra</h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-6">
-            Software Engineer Intern @ Microsoft · IIT Guwahati
-          </p>
-          <p className="text-gray-400 mb-6 max-w-lg leading-relaxed">
-            I build agentic systems, developer tooling, and backend infrastructure — from an
-            LLM-driven bug-remediation pipeline at Microsoft to a hand-rolled CRDT for real-time
-            collaborative editing. I like taking things apart (a CRDT, Git's object store) to
-            understand them well enough to rebuild them, and pairing deterministic engineering
-            with LLM judgment where it actually helps.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-            <a
-              href="https://drive.google.com/uc?export=download&id=1VWau6jbTt_ORxOK5zW2f8nqhShGJp3eh"
-              className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg shadow-blue-600/20 hover:bg-blue-500 hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all"
-            >
-              Download Resume
-            </a>
-            <div className="flex items-center gap-4 md:hidden">
+const AboutSection = () => (
+  <section id="about" className="px-5 sm:px-6 md:px-10 lg:px-14 py-24 border-t border-white/10">
+    <div className="max-w-4xl mx-auto">
+      <Reveal>
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="relative w-40 h-40 md:w-52 md:h-52 shrink-0 animate-float">
+            <div className="absolute -inset-1 rounded-full bg-white/10 blur" />
+            <img src={prf} alt="Profile" className="relative w-full h-full object-cover rounded-full border-4 border-black" />
+          </div>
+          <div className="text-center md:text-left">
+            <p className="font-pixel text-white/50 text-xs mb-2">About</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-3 tracking-tight">Shreyansh Dutt Mehra</h2>
+            <p className="text-lg md:text-xl text-white/70 mb-6">
+              Software Engineer Intern @ Microsoft &middot; IIT Guwahati
+            </p>
+            <p className="text-white/60 mb-6 max-w-lg leading-relaxed">
+              I build agentic systems, developer tooling, and backend infrastructure — from an
+              LLM-driven bug-remediation pipeline at Microsoft to a hand-rolled CRDT for real-time
+              collaborative editing. I like taking things apart (a CRDT, Git's object store) to
+              understand them well enough to rebuild them, and pairing deterministic engineering
+              with LLM judgment where it actually helps.
+            </p>
+            <div className="flex items-center gap-4">
               {socialLinks.map((s) => (
-                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="text-gray-400 hover:text-blue-400 transition-colors">
+                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="text-white/60 hover:text-white transition-colors">
                   {s.icon}
                 </a>
               ))}
             </div>
           </div>
         </div>
-      </div>
-    </Reveal>
+      </Reveal>
 
-    {/* Education */}
-    <Reveal delay={100}>
-      <div className="mt-14">
-        <h3 className="text-xl font-semibold mb-4">Education</h3>
-        <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md hover:border-blue-500/30 transition-colors">
-          <ul className="space-y-4 text-gray-300">
-            <li className="flex flex-col md:flex-row md:justify-between">
-              <div>
-                <strong>Indian Institute of Technology, Guwahati</strong>
-                <div className="text-gray-400">B.Tech Major · 2023 – Present</div>
-              </div>
-              <div className="text-right md:text-left text-gray-300">CGPA: 8.3/10</div>
-            </li>
-            <li className="flex flex-col md:flex-row md:justify-between text-sm text-gray-400 border-t border-white/10 pt-3">
-              <div>Senior Secondary · CBSE Board · 2023</div>
-              <div>95.2%</div>
-            </li>
-            <li className="flex flex-col md:flex-row md:justify-between text-sm text-gray-400">
-              <div>Secondary · CBSE Board · 2021</div>
-              <div>94.6%</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </Reveal>
-
-    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Reveal delay={150}>
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Contact</h3>
-          <ul className="space-y-2 text-gray-300">
-            <li>📞 +91-6378181759</li>
-            <li>✉️ shreyanshduttmehra@gmail.com</li>
-          </ul>
+      <Reveal delay={100}>
+        <div className="mt-14">
+          <h3 className="text-xl font-semibold mb-4">Education</h3>
+          <div className="bg-white/[0.03] border border-white/10 p-6 rounded-xl hover:border-white/20 transition-colors">
+            <ul className="space-y-4 text-white/70">
+              <li className="flex flex-col md:flex-row md:justify-between">
+                <div>
+                  <strong className="text-white">Indian Institute of Technology, Guwahati</strong>
+                  <div className="text-white/50">B.Tech Major &middot; 2023 – Present</div>
+                </div>
+                <div className="text-right md:text-left">CGPA: 8.3/10</div>
+              </li>
+              <li className="flex flex-col md:flex-row md:justify-between text-sm text-white/50 border-t border-white/10 pt-3">
+                <div>Senior Secondary &middot; CBSE Board &middot; 2023</div>
+                <div>95.2%</div>
+              </li>
+              <li className="flex flex-col md:flex-row md:justify-between text-sm text-white/50">
+                <div>Secondary &middot; CBSE Board &middot; 2021</div>
+                <div>94.6%</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </Reveal>
+
       <Reveal delay={200}>
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Socials</h3>
-          <div className="flex flex-wrap gap-4">
-            {socialLinks.map((s) => (
-              <a
-                key={s.name}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors"
-              >
-                {s.icon}
-                <span>{s.name}</span>
-              </a>
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-4">Skills</h3>
+          <div className="bg-white/[0.03] border border-white/10 p-6 rounded-xl space-y-4">
+            {skillGroups.map((group) => (
+              <div key={group.label}>
+                <div className="text-xs uppercase tracking-wider text-white/40 mb-2 font-pixel">{group.label}</div>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 bg-white/5 text-white/90 border border-white/10 rounded-full text-sm font-medium hover:bg-white/10 hover:scale-105 transition-all"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </Reveal>
     </div>
-
-    <Reveal delay={250}>
-      <div className="mt-8">
-        <h3 className="text-xl font-semibold mb-4">Skills</h3>
-        <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md space-y-4">
-          {skillGroups.map((group) => (
-            <div key={group.label}>
-              <div className="text-xs uppercase tracking-wider text-gray-500 mb-2">{group.label}</div>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 bg-blue-900/40 text-blue-200 border border-blue-500/20 rounded-full text-sm font-medium hover:bg-blue-800/50 hover:scale-105 transition-all"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Reveal>
   </section>
 );
 
@@ -374,32 +427,34 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="max-w-4xl mx-auto">
-      <Reveal>
-        <h2 className="text-2xl md:text-3xl font-bold mb-8">Experience</h2>
-      </Reveal>
-      <div className="space-y-8">
-        {experiences.map((exp, index) => (
-          <Reveal key={index} delay={index * 100}>
-            <div className="relative border-l-2 border-blue-500/50 pl-6 pb-2 group">
-              <span className="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.6)] group-hover:scale-125 transition-transform" />
-              <h3 className="text-2xl font-bold">{exp.company}</h3>
-              <p className="text-sm text-gray-400 mt-0.5">{exp.title} · {exp.duration} · {exp.location}</p>
-              <ul className="mt-2 space-y-1.5 text-gray-300 list-disc list-outside ml-4">
-                {exp.description.map((line, i) => (
-                  <li key={i}>{line}</li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2 mt-3">
-                {exp.techStack.map((tech, i) => (
-                  <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 text-gray-200 rounded text-sm">
-                    {tech}
-                  </span>
-                ))}
+    <section id="experience" className="px-5 sm:px-6 md:px-10 lg:px-14 py-24 border-t border-white/10">
+      <div className="max-w-4xl mx-auto">
+        <Reveal>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8">Experience</h2>
+        </Reveal>
+        <div className="space-y-8">
+          {experiences.map((exp, index) => (
+            <Reveal key={index} delay={index * 100}>
+              <div className="relative border-l-2 border-white/20 pl-6 pb-2 group">
+                <span className="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-white shadow-[0_0_10px_2px_rgba(255,255,255,0.4)] group-hover:scale-125 transition-transform" />
+                <h3 className="text-2xl font-bold">{exp.company}</h3>
+                <p className="text-sm text-white/50 mt-0.5">{exp.title} &middot; {exp.duration} &middot; {exp.location}</p>
+                <ul className="mt-2 space-y-1.5 text-white/70 list-disc list-outside ml-4">
+                  {exp.description.map((line, i) => (
+                    <li key={i}>{line}</li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {exp.techStack.map((tech, i) => (
+                    <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 text-white/80 rounded text-sm">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -424,7 +479,6 @@ const featuredProjects = [
     title: 'MandateGuard',
     subtitle: 'Governance Layer for Financial AI Agents',
     icon: <ShieldIcon />,
-    gradient: 'from-emerald-500/20 to-blue-500/20',
     description:
       'A permit-gated action broker (FastAPI + OPA/Rego + PostgreSQL) enforcing authenticated, policy-checked, budget-bounded agent actions. Every action is verified via signed receipts and a hash-chained audit log, validated with 11 deterministic adversarial scenarios (bypass, replay, tamper).',
     link: 'https://github.com/ShreyanshMehra/MandateGuard',
@@ -434,7 +488,6 @@ const featuredProjects = [
     title: 'cocode',
     subtitle: 'Collaborative Real-Time Code Editor',
     icon: <UsersIcon />,
-    gradient: 'from-indigo-500/20 to-purple-500/20',
     description:
       'A hand-implemented causal-tree/RGA sequence CRDT (no CRDT libraries) letting concurrent edits from multiple clients converge without server-side locking. WebSocket rooms with presence, content-addressed snapshot versioning, and a CodeMirror 6 frontend with live remote cursors.',
     link: 'https://github.com/ShreyanshMehra/cocode',
@@ -445,7 +498,6 @@ const featuredProjects = [
     title: 'gitfromscratch',
     subtitle: 'A Minimal Git Implementation in Go',
     icon: <TerminalIcon />,
-    gradient: 'from-orange-500/20 to-red-500/20',
     description:
       'Reimplements Git’s core internals — a content-addressed object store, staging index, refs, branches, diffs, and a basic merge — to show exactly how Git works under the hood. Objects use SHA-1 + zlib, so hashes match real git for the same content; every command is tested and verified against real git.',
     link: 'https://github.com/ShreyanshMehra/gitfromscratch',
@@ -455,7 +507,6 @@ const featuredProjects = [
     title: 'CV Align Agents',
     subtitle: 'Multi-Agent Resume Screening',
     icon: <CodeBracketsIcon />,
-    gradient: 'from-cyan-500/20 to-blue-500/20',
     description:
       'A multi-agent pipeline (LangGraph + Gemini: parser → matcher → deterministic scorer → hygiene checker → critic) with a confidence-gated self-correction loop, separating deterministic scoring/hygiene rules from LLM judgment calls. Shipped with 68 offline tests and a provider-abstracted FastAPI backend.',
     link: 'https://github.com/ShreyanshMehra/CV-Align-Agents',
@@ -506,93 +557,95 @@ const ProjectsSection = () => {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <section className="max-w-6xl mx-auto">
-      <Reveal>
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">Featured Projects</h2>
-        <p className="text-gray-400 mb-8">Systems, agents, and backend infrastructure I've built end to end.</p>
-      </Reveal>
+    <section id="projects" className="px-5 sm:px-6 md:px-10 lg:px-14 py-24 border-t border-white/10">
+      <div className="max-w-6xl mx-auto">
+        <Reveal>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Featured Projects</h2>
+          <p className="text-white/50 mb-8">Systems, agents, and backend infrastructure I've built end to end.</p>
+        </Reveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {featuredProjects.map((project, index) => (
-          <Reveal key={project.title} delay={index * 100}>
-            <div className="group relative h-full bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:border-blue-500/40 hover:-translate-y-1 transition-all duration-300">
-              <div className={`h-24 flex items-center px-6 bg-gradient-to-r ${project.gradient} border-b border-white/10`}>
-                <div className="text-white/90 group-hover:scale-110 transition-transform">{project.icon}</div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold">{project.title}</h3>
-                  <p className="text-sm text-gray-300">{project.subtitle}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featuredProjects.map((project, index) => (
+            <Reveal key={project.title} delay={index * 100}>
+              <div className="group relative h-full bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden hover:border-white/30 hover:-translate-y-1 transition-all duration-300">
+                <div className="h-24 flex items-center px-6 bg-white/[0.04] border-b border-white/10">
+                  <div className="text-white/90 group-hover:scale-110 transition-transform">{project.icon}</div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                    <p className="text-sm text-white/60">{project.subtitle}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 bg-blue-900/40 text-blue-200 text-xs rounded border border-blue-500/20">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-4">
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-medium">
-                    <GithubIcon /> Code
-                  </a>
-                  {project.demo && (
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-medium">
-                      <ExternalLinkIcon /> Live Demo
+                <div className="p-6">
+                  <p className="text-white/60 mb-4 leading-relaxed">{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="px-2 py-0.5 bg-white/5 text-white/70 text-xs rounded border border-white/10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-white hover:text-white/70 font-medium">
+                      <GithubIcon /> Code
                     </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-
-      <Reveal delay={100}>
-        <div className="mt-12">
-          <button
-            onClick={() => setShowMore((v) => !v)}
-            className="flex items-center gap-2 text-lg font-semibold text-gray-200 hover:text-blue-400 transition-colors"
-          >
-            {showMore ? 'Hide' : 'Show'} More Projects
-            <span className={`transition-transform ${showMore ? 'rotate-180' : ''}`}>▾</span>
-          </button>
-        </div>
-      </Reveal>
-
-      {showMore && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {moreProjects.map((project, index) => (
-            <Reveal key={project.title} delay={index * 60}>
-              <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-all">
-                <img src={project.image} alt={project.title} className="w-full h-40 object-cover" />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-400 mb-3 text-sm">{project.description}</p>
-                  <div className="flex justify-between items-center">
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline text-sm">
-                      View Project
-                    </a>
-                    <div className="flex flex-wrap gap-1 justify-end">
-                      {project.tags.map((tag, i) => (
-                        <span key={i} className="px-2 py-0.5 bg-blue-900/40 text-blue-200 text-xs rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    {project.demo && (
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-white/70 hover:text-white font-medium">
+                        <ExternalLinkIcon /> Live Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
-      )}
+
+        <Reveal delay={100}>
+          <div className="mt-12">
+            <button
+              onClick={() => setShowMore((v) => !v)}
+              className="flex items-center gap-2 text-lg font-semibold text-white/80 hover:text-white transition-colors"
+            >
+              {showMore ? 'Hide' : 'Show'} More Projects
+              <span className={`transition-transform ${showMore ? 'rotate-180' : ''}`}>▾</span>
+            </button>
+          </div>
+        </Reveal>
+
+        {showMore && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {moreProjects.map((project, index) => (
+              <Reveal key={project.title} delay={index * 60}>
+                <div className="bg-white/[0.03] border border-white/10 rounded-lg overflow-hidden hover:-translate-y-1 transition-all">
+                  <img src={project.image} alt={project.title} className="w-full h-40 object-cover" />
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                    <p className="text-white/60 mb-3 text-sm">{project.description}</p>
+                    <div className="flex justify-between items-center">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-white hover:underline text-sm">
+                        View Project
+                      </a>
+                      <div className="flex flex-wrap gap-1 justify-end">
+                        {project.tags.map((tag, i) => (
+                          <span key={i} className="px-2 py-0.5 bg-white/5 text-white/60 text-xs rounded">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 };
 
-/* ---------------- Certifications & Achievements ---------------- */
-const CertificationSection = () => {
+/* ---------------- Achievements & Certifications ---------------- */
+const AchievementsSection = () => {
   const achievements = [
     { title: "'AS' Grade — Top ~2–3 per 100 in Batch", description: 'Awarded the exceptional ‘AS’ distinction in an advanced engineering mathematics course.' },
     { title: 'Qualified JEE Advanced', description: "Cleared India's most competitive engineering entrance exam, among top candidates nationwide." },
@@ -621,46 +674,112 @@ const CertificationSection = () => {
   ];
 
   return (
-    <section className="max-w-4xl mx-auto">
-      <Reveal>
-        <h2 className="text-2xl md:text-3xl font-bold mb-8">Achievements & Certifications</h2>
-      </Reveal>
+    <section id="achievements" className="px-5 sm:px-6 md:px-10 lg:px-14 py-24 border-t border-white/10">
+      <div className="max-w-4xl mx-auto">
+        <Reveal>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8">Achievements &amp; Certifications</h2>
+        </Reveal>
 
-      <div className="space-y-10">
-        <div>
-          <Reveal><h3 className="text-xl font-semibold mb-4">🏆 Achievements</h3></Reveal>
-          <div className="space-y-4">
-            {achievements.map((a, index) => (
-              <Reveal key={index} delay={index * 80}>
-                <div className="border-l-4 border-yellow-500/70 pl-4 py-1 hover:bg-white/5 rounded-r-lg transition-colors">
-                  <h4 className="font-medium">{a.title}</h4>
-                  <p className="mt-1 text-gray-400">{a.description}</p>
-                </div>
-              </Reveal>
-            ))}
+        <div className="space-y-10">
+          <div>
+            <Reveal><h3 className="text-xl font-semibold mb-4">Achievements</h3></Reveal>
+            <div className="space-y-4">
+              {achievements.map((a, index) => (
+                <Reveal key={index} delay={index * 80}>
+                  <div className="border-l-2 border-white/20 pl-4 py-1 hover:bg-white/[0.03] rounded-r-lg transition-colors">
+                    <h4 className="font-medium">{a.title}</h4>
+                    <p className="mt-1 text-white/50">{a.description}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div>
-          <Reveal><h3 className="text-xl font-semibold mb-4">📜 Certifications</h3></Reveal>
-          <div className="space-y-4">
-            {certifications.map((cert, index) => (
-              <Reveal key={index} delay={index * 80}>
-                <div className="border-l-4 border-green-500/70 pl-4 py-1 hover:bg-white/5 rounded-r-lg transition-colors">
-                  <h4 className="font-medium">{cert.title}</h4>
-                  <p className="text-gray-400">{cert.issuer} • {cert.date}</p>
-                  {cert.link && (
-                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
-                      View Certificate
-                    </a>
-                  )}
-                </div>
-              </Reveal>
-            ))}
+          <div>
+            <Reveal><h3 className="text-xl font-semibold mb-4">Certifications</h3></Reveal>
+            <div className="space-y-4">
+              {certifications.map((cert, index) => (
+                <Reveal key={index} delay={index * 80}>
+                  <div className="border-l-2 border-white/20 pl-4 py-1 hover:bg-white/[0.03] rounded-r-lg transition-colors">
+                    <h4 className="font-medium">{cert.title}</h4>
+                    <p className="text-white/50">{cert.issuer} • {cert.date}</p>
+                    {cert.link && (
+                      <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white hover:underline">
+                        View Certificate
+                      </a>
+                    )}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+/* ---------------- Contact / Footer ---------------- */
+const ContactSection = () => (
+  <section id="contact" className="px-5 sm:px-6 md:px-10 lg:px-14 py-24 border-t border-white/10">
+    <div className="max-w-4xl mx-auto text-center">
+      <Reveal>
+        <p className="font-pixel text-white/50 text-xs mb-3">Get in touch</p>
+        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">Let's build something.</h2>
+        <p className="text-white/60 max-w-lg mx-auto mb-8">
+          Open to SWE internships and full-time roles. Reach out by email or find me on GitHub, LinkedIn, or LeetCode.
+        </p>
+        <a
+          href="mailto:shreyanshduttmehra@gmail.com"
+          className="inline-block px-6 py-3 border border-white/30 bg-white/5 hover:bg-white/10 transition-colors text-sm tracking-wider"
+        >
+          shreyanshduttmehra@gmail.com
+        </a>
+        <div className="flex items-center justify-center gap-6 mt-8">
+          {socialLinks.map((s) => (
+            <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="text-white/60 hover:text-white transition-colors">
+              {s.icon}
+            </a>
+          ))}
+        </div>
+      </Reveal>
+    </div>
+    <div className="mt-16 pt-6 border-t border-white/10 text-center text-white/40 text-xs">
+      © {new Date().getFullYear()} Shreyansh Dutt Mehra
+    </div>
+  </section>
+);
+
+/* ---------------- App ---------------- */
+const App = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showStickyNav, setShowStickyNav] = useState(false);
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const node = heroRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyNav(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="bg-black text-white font-sans selection:bg-white/20">
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <StickyNav visible={showStickyNav} onMenuOpen={() => setMenuOpen(true)} />
+      <div ref={heroRef}>
+        <HeroSection onMenuOpen={() => setMenuOpen(true)} />
+      </div>
+      <AboutSection />
+      <ExperienceSection />
+      <ProjectsSection />
+      <AchievementsSection />
+      <ContactSection />
+    </div>
   );
 };
 
