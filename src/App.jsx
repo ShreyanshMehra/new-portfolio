@@ -438,6 +438,7 @@ const featuredProjects = [
     description:
       'A hand-implemented causal-tree/RGA sequence CRDT (no CRDT libraries) letting concurrent edits from multiple clients converge without server-side locking. WebSocket rooms with presence, content-addressed snapshot versioning, and a CodeMirror 6 frontend with live remote cursors.',
     link: 'https://github.com/ShreyanshMehra/cocode',
+    demo: 'https://shreyansh112-cocode.hf.space',
     tags: ['Go', 'CRDT', 'WebSockets', 'Docker'],
   },
   {
