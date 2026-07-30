@@ -438,7 +438,6 @@ const featuredProjects = [
     description:
       'A hand-implemented causal-tree/RGA sequence CRDT (no CRDT libraries) letting concurrent edits from multiple clients converge without server-side locking. WebSocket rooms with presence, content-addressed snapshot versioning, and a CodeMirror 6 frontend with live remote cursors.',
     link: 'https://github.com/ShreyanshMehra/cocode',
-    demo: 'https://shreyansh112-cocode.hf.space',
     tags: ['Go', 'CRDT', 'WebSockets', 'Docker'],
   },
   {
@@ -459,7 +458,7 @@ const featuredProjects = [
     description:
       'A multi-agent pipeline (LangGraph + Gemini: parser → matcher → deterministic scorer → hygiene checker → critic) with a confidence-gated self-correction loop, separating deterministic scoring/hygiene rules from LLM judgment calls. Shipped with 68 offline tests and a provider-abstracted FastAPI backend.',
     link: 'https://github.com/ShreyanshMehra/CV-Align-Agents',
-    demo: 'https://cv-align.onrender.com/',
+    demo: 'https://shreyansh112-cv-align-agents.hf.space/',
     tags: ['LangGraph', 'Gemini', 'FastAPI', 'RAG'],
   },
 ];
