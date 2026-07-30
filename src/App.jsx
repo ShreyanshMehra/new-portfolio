@@ -191,7 +191,7 @@ const HeroSection = ({ onMenuOpen }) => (
 
         <div className="text-right lg:text-left">
           <p className="text-[10px] text-white/50">*</p>
-          <p className="font-pixel mt-1 text-xs text-white/60 leading-relaxed">
+          <p className="font-pixel mt-1 text-sm md:text-base text-white leading-relaxed">
             IIT Guwahati — B.Tech<br />
             Software Engineer Intern<br />
             @ Microsoft &middot; Prior: IDEAS-TIH<br />
