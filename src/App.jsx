@@ -383,8 +383,8 @@ const ExperienceSection = () => {
           <Reveal key={index} delay={index * 100}>
             <div className="relative border-l-2 border-blue-500/50 pl-6 pb-2 group">
               <span className="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.6)] group-hover:scale-125 transition-transform" />
-              <h3 className="text-xl font-semibold">{exp.title}</h3>
-              <p className="text-gray-400">{exp.company} · {exp.duration} · {exp.location}</p>
+              <h3 className="text-2xl font-bold">{exp.company}</h3>
+              <p className="text-sm text-gray-400 mt-0.5">{exp.title} · {exp.duration} · {exp.location}</p>
               <ul className="mt-2 space-y-1.5 text-gray-300 list-disc list-outside ml-4">
                 {exp.description.map((line, i) => (
                   <li key={i}>{line}</li>
