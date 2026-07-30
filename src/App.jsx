@@ -179,18 +179,18 @@ const HeroSection = ({ onMenuOpen }) => (
 
       {/* Meta grid */}
       <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-        <div>
-          <div className="w-24 h-24 md:w-28 md:h-28 rounded-lg overflow-hidden border border-white/20">
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border border-white/20 shrink-0">
             <img src={prf} alt="Shreyansh Dutt Mehra" className="w-full h-full object-cover" />
           </div>
-        </div>
-
-        <div className="text-right lg:text-left">
           <h2 className="text-lg md:text-xl tracking-wide leading-tight">
             <span className="font-normal block">SHREYANSH DUTT</span>
             <span className="font-pixel text-2xl md:text-3xl block">MEHRA</span>
           </h2>
-          <p className="text-[10px] text-white/50 mt-3">*</p>
+        </div>
+
+        <div className="text-right lg:text-left">
+          <p className="text-[10px] text-white/50">*</p>
           <p className="font-pixel mt-1 text-xs text-white/60 leading-relaxed">
             IIT Guwahati — B.Tech<br />
             Software Engineer Intern<br />
@@ -234,10 +234,10 @@ const HeroSection = ({ onMenuOpen }) => (
           <div className="flex flex-col gap-4 sm:gap-6 justify-end">
             <a
               href={RESUME_URL}
-              className="self-start lg:self-end flex items-center gap-3 border border-white/30 px-6 py-3 backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-colors"
+              className="self-start lg:self-end flex items-center gap-3 border border-white/30 px-7 py-4 backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-colors"
             >
-              <Download size={14} />
-              <span className="text-sm tracking-wider">VIEW RESUME</span>
+              <Download size={20} strokeWidth={2.5} />
+              <span className="text-lg sm:text-xl font-bold tracking-wider">VIEW RESUME</span>
             </a>
           </div>
         </div>
